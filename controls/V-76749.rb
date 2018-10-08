@@ -1,10 +1,4 @@
-AUTHORIZED_USERS= attribute(
-    'authorized_users',
-    description: 'Name of Tomcat service',
-    default: 'inspec'
-)
-
-control "V-76749" do
+control 'V-76749' do
   title "Access to web administration tools must be restricted to the web
 manager and the web managers designees."
   desc  "A web server can be modified through parameter modification, patch
@@ -25,15 +19,15 @@ to authorized users and administrators.
 
   "
   impact 0.7
-  tag "gtitle": "SRG-APP-000380-WSR-000072"
-  tag "satisfies": ["SRG-APP-000380-WSR-000072", "SRG-APP-000435-WSR-000147",
-"SRG-APP-000033-WSR-000169"]
-  tag "gid": "V-76749"
-  tag "rid": "SV-91445r1_rule"
-  tag "stig_id": "IISW-SV-000147"
-  tag "fix_id": "F-83445r1_fix"
-  tag "cci": ["CCI-000213", "CCI-001813", "CCI-002385"]
-  tag "nist": ["AC-3", "CM-5 (1)", "SC-5", "Rev_4"]
+  tag "gtitle": 'SRG-APP-000380-WSR-000072'
+  tag "satisfies": ['SRG-APP-000380-WSR-000072', 'SRG-APP-000435-WSR-000147',
+                    'SRG-APP-000033-WSR-000169']
+  tag "gid": 'V-76749'
+  tag "rid": 'SV-91445r1_rule'
+  tag "stig_id": 'IISW-SV-000147'
+  tag "fix_id": 'F-83445r1_fix'
+  tag "cci": ['CCI-000213', 'CCI-001813', 'CCI-002385']
+  tag "nist": ['AC-3', 'CM-5 (1)', 'SC-5', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
   tag "documentable": false
@@ -75,6 +69,7 @@ manager and the web manager’s designees."
 
   describe file('%windir%\system32\inetsrv\InetMgr.exe') do
     # Full control for administrators
+    # FIXME is `WIN-EFQ98MD6RFI` a universal windows ID of some kind?
     it { should be_allowed('full-control', by_user: 'WIN-EFQ98MD6RFI/Administrator') }
 
     # read & execute for ALL APPLICATION PACKAGES, SYSTEM, Users
@@ -86,9 +81,13 @@ manager and the web manager’s designees."
     it { should be_executable.by('Users') }
 
     # users with read & execute permissions
-    it { should be_readable.by_user("#{AUTHORIZED_USERS}") }
-    it { should be_executable.by_user("#{AUTHORIZED_USERS}") }
-
+    # TODO this is an array by its name - i.e. plural users - so we have
+    # to have a loop here so that we ensure this is true for all users and groups in the
+    # list per the check text above.
+    # TODO make me seperate describle blocks for the set of users and the set of groups.
+    # TODO create an athorized_groups attribute
+    # FIXME this is a broken hack to just grab the first element of the array
+    it { should be_readable.by_user(attribute('authorized_users').first) }
+    it { should be_executable.by_user(attribute('authorized_users').first) }
   end
 end
-

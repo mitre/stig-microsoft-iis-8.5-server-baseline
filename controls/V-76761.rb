@@ -1,4 +1,4 @@
-control "V-76761" do
+control 'V-76761' do
   title "A web server must maintain the confidentiality of controlled
 information during transmission through the use of an approved TLS version."
   desc  "Transport Layer Security (TLS) is a required transmission protocol for
@@ -11,13 +11,13 @@ must be disabled.
 applications.
   "
   impact 0.7
-  tag "gtitle": "SRG-APP-000439-WSR-000156"
-  tag "gid": "V-76761"
-  tag "rid": "SV-91457r1_rule"
-  tag "stig_id": "IISW-SV-000154"
-  tag "fix_id": "F-83457r1_fix"
-  tag "cci": ["CCI-002418"]
-  tag "nist": ["SC-8", "Rev_4"]
+  tag "gtitle": 'SRG-APP-000439-WSR-000156'
+  tag "gid": 'V-76761'
+  tag "rid": 'SV-91457r1_rule'
+  tag "stig_id": 'IISW-SV-000154'
+  tag "fix_id": 'F-83457r1_fix'
+  tag "cci": ['CCI-002418']
+  tag "nist": ['SC-8', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
   tag "documentable": false
@@ -38,11 +38,10 @@ to NIST SP 800-52 and to disable all non-approved versions."
 
   describe.one do
     describe registry_key('HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Client') do
-      its('Enabled') { should cmp "1" }
+      its('Enabled') { should be 1 }
     end
     describe registry_key('HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Client') do
-      its('Enabled') { should cmp "1" }
+      its('Enabled') { should be 1 }
     end
   end
 end
-

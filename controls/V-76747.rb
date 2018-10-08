@@ -1,10 +1,4 @@
-LOG_DIRECTORY= attribute(
-    'log_directory',
-    description: 'Name of Tomcat service',
-    default: '%SystemDrive%\inetpub\logs\LogFiles'
-)
-
-control "V-76747" do
+control 'V-76747' do
   title "The IIS 8.5 web server must use a logging mechanism that is configured
 to allocate log record storage capacity large enough to accommodate the logging
 requirements of the IIS 8.5 web server."
@@ -20,13 +14,13 @@ disk. Refer to NIST SP 800-92 for specific requirements on log rotation and
 storage dependent on the impact of the web server.
   "
   impact 0.7
-  tag "gtitle": "SRG-APP-000357-WSR-000150"
-  tag "gid": "V-76747"
-  tag "rid": "SV-91443r1_rule"
-  tag "stig_id": "IISW-SV-000145"
-  tag "fix_id": "F-83443r1_fix"
-  tag "cci": ["CCI-001849"]
-  tag "nist": ["AU-4", "Rev_4"]
+  tag "gtitle": 'SRG-APP-000357-WSR-000150'
+  tag "gid": 'V-76747'
+  tag "rid": 'SV-91443r1_rule'
+  tag "stig_id": 'IISW-SV-000145'
+  tag "fix_id": 'F-83443r1_fix'
+  tag "cci": ['CCI-001849']
+  tag "nist": ['AU-4', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
   tag "documentable": false
@@ -76,10 +70,9 @@ setting.
 Configure a schedule to rollover log files on a regular basis."
 
   describe command('Get-WebConfigurationProperty -pspath "MACHINE/WEBROOT/APPHOST" -filter "system.ApplicationHost/log" -Name centralW3CLogFile | select -expandProperty directory').stdout.strip do
-    it {should cmp "#{LOG_DIRECTORY}"}
+    it { should cmp attribute('log_directory') }
   end
   describe command('Get-WebConfigurationProperty -pspath "MACHINE/WEBROOT/APPHOST" -filter "system.ApplicationHost/log" -Name centralW3CLogFile | select -expandProperty period').stdout.strip do
-    it {should cmp "Daily"}
+    it { should cmp 'Daily' }
   end
 end
-

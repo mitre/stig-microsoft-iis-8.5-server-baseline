@@ -1,4 +1,4 @@
-control "V-76759" do
+control 'V-76759' do
   title "An IIS 8.5 web server must maintain the confidentiality of controlled
 information during transmission through the use of an approved TLS version."
   desc  "Transport Layer Security (TLS) encryption is a required security
@@ -12,13 +12,13 @@ non-FIPS-approved SSL versions must be disabled.
 800-52 specifies the preferred configurations for government systems.
   "
   impact 0.7
-  tag "gtitle": "SRG-APP-000439-WSR-000156"
-  tag "gid": "V-76759"
-  tag "rid": "SV-91455r1_rule"
-  tag "stig_id": "IISW-SV-000153"
-  tag "fix_id": "F-83455r1_fix"
-  tag "cci": ["CCI-002418"]
-  tag "nist": ["SC-8", "Rev_4"]
+  tag "gtitle": 'SRG-APP-000439-WSR-000156'
+  tag "gid": 'V-76759'
+  tag "rid": 'SV-91455r1_rule'
+  tag "stig_id": 'IISW-SV-000153'
+  tag "fix_id": 'F-83455r1_fix'
+  tag "cci": ['CCI-002418']
+  tag "nist": ['SC-8', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
   tag "documentable": false
@@ -85,23 +85,22 @@ HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols
 With a REG_DWORD value of \"1\" for \"DisabledByDefault\""
 
   describe registry_key('HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Client') do
-    its('DisabledByDefault') { should cmp "0" }
+    its('DisabledByDefault') { should be 0 }
   end
 
   describe registry_key('HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Client') do
-    its('DisabledByDefault') { should cmp "0" }
+    its('DisabledByDefault') { should be 0 }
   end
 
   describe registry_key('HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Client') do
-    its('DisabledByDefault') { should cmp "1" }
+    its('DisabledByDefault') { should be 1 }
   end
 
   describe registry_key('HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0\Client') do
-    its('DisabledByDefault') { should cmp "1" }
+    its('DisabledByDefault') { should be 1 }
   end
 
   describe registry_key('HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Client') do
-    its('DisabledByDefault') { should cmp "1" }
+    its('DisabledByDefault') { should be 1 }
   end
 end
-

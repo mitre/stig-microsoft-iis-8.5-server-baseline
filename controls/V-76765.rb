@@ -1,4 +1,4 @@
-control "V-76765" do
+control 'V-76765' do
   title "All accounts installed with the IIS 8.5 web server software and tools
 must have passwords assigned and default passwords changed."
   desc  "During installation of the web server software, accounts are created
@@ -18,13 +18,13 @@ until change, reuse policy, etc.
 need to have passwords set or changed.
   "
   impact 0.7
-  tag "gtitle": "SRG-APP-000516-WSR-000079"
-  tag "gid": "V-76765"
-  tag "rid": "SV-91461r1_rule"
-  tag "stig_id": "IISW-SV-000156"
-  tag "fix_id": "F-83461r1_fix"
-  tag "cci": ["CCI-000366"]
-  tag "nist": ["CM-6 b", "Rev_4"]
+  tag "gtitle": 'SRG-APP-000516-WSR-000079'
+  tag "gid": 'V-76765'
+  tag "rid": 'SV-91461r1_rule'
+  tag "stig_id": 'IISW-SV-000156'
+  tag "fix_id": 'F-83461r1_fix'
+  tag "cci": ['CCI-000366']
+  tag "nist": ['CM-6 b', 'Rev_4']
   tag "false_negatives": nil
   tag "false_positives": nil
   tag "documentable": false
@@ -58,4 +58,3 @@ verify with System Administrator that default passwords have been changed.
 
 Develop an internal process for changing passwords on a regular basis."
 end
-

@@ -1,12 +1,43 @@
-name: IIS 8.5 Server Security Technical Implementation Guide
-title: IIS 8.5 Server Security Technical Implementation Guide
-maintainer: 
-copyright: 
-copyright_email: 
-license: Apache-2.0
-summary: This Security Technical Implementation Guide is published as a tool to improve the security of Department of Defense DoD information systems. The requirements are derived from the National Institute of Standards and Technology NIST 800-53 and related documents. Comments or proposed revisions to this document should be sent via email to the following address
-version: 0.1.0
+name: 'IIS 8.5 Server Security Technical Implementation Guide'
+title: 'IIS 8.5 Server Security Technical Implementation Guide'
+maintainer: 'inspec@mitre.org'
+copyright: 'MITRE 2018'
+copyright_email: 'inspec@mitre.org'
+license: 'Apache-2.0'
+summary: 'IIS 8.5 Server Security Technical Implementation Guide'
+description: 'This Security Technical Implementation Guide is published as a
+tool to improve the security of Department of Defense DoD information systems.
+The requirements are derived from the National Institute of Standards and
+Technology NIST 800-53 and related documents.  Comments or proposed revisions
+to this document should be sent via email to the following address'
 
+version: 0.2.0
 
+supports:
+  - platform-name: windows
 
+inspec_version: "~> 2.3.4"
 
+attributes:
+  - name: 'iis_site_name',
+    type: string
+    description: 'Name of IIS Site under evaluation',
+    default: 'Default Web Site'
+    required: true
+
+  - name: 'log_directory'
+    type: string
+    description: 'The log file location for the IIS site instance'
+    default: '%SystemDrive%\inetpub\logs\LogFiles'
+    required: true
+
+  - name: 'authorized_users'
+    type: array
+    description: 'The list of authorized admin users for the IIS site instance'
+    default: ['inspec']
+
+  - name: 'file_system_object_component'
+    type: boolan
+    description: 'Name of Tomcat service'
+    default: true
+    required: true
